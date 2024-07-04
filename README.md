@@ -95,3 +95,79 @@ public class Autor {
         return sb.toString();
     }
 }
+
+
+
+/modelopublicacion
+
+public class Publicacion {
+    private int año;
+    private String nombreRevista;
+    private String titulo;
+    
+    public Publicacion(int año,String nombreRevista, String titulo){
+        this.año=año;
+        this.nombreRevista=nombreRevista;
+        this.titulo=titulo;
+    }
+    
+    @Override
+    public String toString(){
+        return this.año+"-"+this.nombreRevista+"-"+this.titulo;
+    }
+}
+
+
+
+//vistadeautor(falta importar)
+
+public class vistaAutor {
+    public static void main(String[] args) {
+        controladorAutor controlador = new controladorAutor();
+
+        Autor autor1 = controlador.crearAutor("Universidad XYZ", "Inteligencia Artificial", "Mexicana", "Juan Perez", 3);
+        Publicacion pub1 = controlador.crearPublicacion(2020, "Revista Científica", "Investigación en AI");
+        Publicacion pub2 = controlador.crearPublicacion(2021, "Revista de Tecnología", "Avances en Machine Learning");
+        Publicacion pub3 = controlador.crearPublicacion(2022, "Revista de Innovación", "Nuevas técnicas en Deep Learning");
+
+        controlador.AgregarPublicacion(pub1, autor1);
+        controlador.AgregarPublicacion(pub2, autor1);
+        controlador.AgregarPublicacion(pub3, autor1);
+
+        System.out.println(controlador.imprimirAutor(autor1));
+
+        Autor autor2 = controlador.crearAutor("Instituto ABC", "Robótica", "Peruana", "Maria Gonzalez", 3);
+        Publicacion pub4 = controlador.crearPublicacion(2019, "Revista de Robótica", "Robots en la Industria");
+        Publicacion pub5 = controlador.crearPublicacion(2020, "Revista de Innovación", "Avances en Robótica Médica");
+        Publicacion pub6 = controlador.crearPublicacion(2021, "Revista Tecnológica", "Robots Autónomos");
+
+        controlador.AgregarPublicacion(pub4, autor2);
+        controlador.AgregarPublicacion(pub5, autor2);
+        controlador.AgregarPublicacion(pub6, autor2);
+
+        System.out.println(controlador.imprimirAutor(autor2));
+    }
+}
+
+//Controlador
+public class controladorAutor {
+    public void AgregarPublicacion(Publicacion publicacionNueva, Autor autor) {
+        try {
+            autor.AgregarPublicacion(publicacionNueva);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public Autor crearAutor(String filiacion, String lineaInvestigacion, String nacionalidad, String nombre, int tamañoArreglo) {
+        return new Autor(filiacion, lineaInvestigacion, nacionalidad, nombre, tamañoArreglo);
+    }
+
+    public Publicacion crearPublicacion(int año, String nombreRevista, String titulo) {
+        return new Publicacion(año, nombreRevista, titulo);
+    }
+
+    public String imprimirAutor(Autor autor) {
+        return autor.toString();
+    }
+}
